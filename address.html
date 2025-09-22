@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历布局</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+ 
+        .header {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+ 
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                "edu . uni"
+                ". photo ."
+                "comp . plan";
+            gap: 15px;
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+        }
+ 
+        .box {
+            border: 2px solid black;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: white;
+            min-height: 120px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+ 
+        .edu { grid-area: edu; background-color: #e6f7ff; color: #000; }
+        .uni { grid-area: uni; background-color: #f0f0f0; color: #000; }
+        .comp { grid-area: comp; background-color: #ffe6e6; color: #000; }
+        .photo { 
+            grid-area: photo; 
+            background-color: #ffffff; 
+            position: relative;
+            overflow: hidden;
+        }
+        .plan { grid-area: plan; background-color: #fff2e6; color: #000; }
+ 
+        .photo .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+        }
+ 
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">姓名</div>
+    <div class="grid-container">
+        <div class="box edu">
+            <div class="content">初高中教育经历<br>蓝底白字</div>
+        </div>
+        <div class="box uni">
+            <div class="content">大学学习经历<br>白底黑字</div>
+        </div>
+        <div class="box comp">
+            <div class="content">参赛经历<br>红底白字</div>
+        </div>
+        <div class="box photo">
+            <div class="content">
+                <img src="https://via.placeholder.com/200" alt="个人照片">
+            </div>
+        </div>
+        <div class="box plan">
+            <div class="content">未来的规划<br>金底白字</div>
+        </div>
+    </div>
+</body>
+</html>
