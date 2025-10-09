@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 大象类
+class Elephant {
+private:
+    double weight;
+public:
+    Elephant(double w) {
+        weight = w;
+    }
+    
+    double getWeight() {
+        return weight;
+    }
+};
+
+// 冰箱类
+class Refrigerator {
+private:
+    double capacity;
+    double currentWeight;
+public:
+    Refrigerator(double cap) {
+        capacity = cap;
+        currentWeight = 0;
+    }
+    
+    bool canPutElephant(Elephant& elephant) {
+        return (currentWeight + elephant.getWeight() <= capacity);
+    }
+    
+    void putElephant(Elephant& elephant) {
+        if (canPutElephant(elephant)) {
+            currentWeight += elephant.getWeight();
+            cout << "成功把大象装进冰箱！" << endl;
+        } else {
+            cout << "冰箱装不下大象！" << endl;
+        }
+    }
+    
+    void showStatus() {
+        cout << "冰箱容量：" << capacity << "kg，已使用：" << currentWeight << "kg" << endl;
+    }
+};
+
+// 主函数
+int main() {
+    cout << "=== 大象装冰箱程序 ===" << endl;
+    Elephant elephant(300);
+    Refrigerator fridge(500);
+    fridge.showStatus();
+    cout << "\n尝试把大象装进冰箱..." << endl;
+    fridge.putElephant(elephant);
+    fridge.showStatus();
+    cout << "\n程序结束！" << endl;
+    return 0;
+}
