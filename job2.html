@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐_0246_job2</title>
+    <!-- 题目5：2分钟后跳转到山东师范大学首页 -->
+    <meta http-equiv="refresh" content="120;url=https://www.sdnu.edu.cn/">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin: 10px 0;
+        }
+        .poem-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .poem {
+            width: 30%;
+        }
+        .poem-title {
+            font-family: "仿宋", "FangSong", serif;
+            font-size: 6px;
+            color: #81D8D0; /* 蒂芙尼蓝 */
+        }
+        .poem-author {
+            font-family: "隶书", "LiSu", serif;
+            font-size: 5px;
+            color: #EC8136; /* 爱马仕橙 */
+        }
+        .poem-content {
+            font-family: "楷体", "KaiTi", serif;
+            font-size: 5px;
+            color: #AE2423; /* 卡地亚红 */
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .countdown {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 题目1：六级标题 -->
+        <h1>沃尔玛 (Walmart) 美国6120亿美元 行业零售</h1>
+        <h2>亚马逊 (Amazon) 美国5210亿美元 行业电商与科技</h2>
+        <h3>国家电网 (State Grid) 中国4870亿美元 行业公用事业</h3>
+        <h4>沙特阿美 (Saudi Aramco) 沙特阿拉伯4030亿美元 行业石油能源</h4>
+        <h5>中国石化 (Sinopec) 中国4010亿美元 行业石化能源</h5>
+        <h6>中国石油 (CNPC) 中国3950亿美元 行业石化能源</h6>
+        
+        <p></p>
+        
+        <!-- 题目2：山东诗人诗词 -->
+        <h2>山东诗人诗词</h2>
+        <div class="poem-container">
+            <div class="poem">
+                <div class="poem-title">《望岳》</div>
+                <div class="poem-author">杜甫</div>
+                <div class="poem-content">
+                    岱宗夫如何？齐鲁青未了。<br>
+                    造化钟神秀，阴阳割昏晓。<br>
+                    荡胸生曾云，决眦入归鸟。<br>
+                    会当凌绝顶，一览众山小。
+                </div>
+            </div>
+            <div class="poem">
+                <div class="poem-title">《夏日绝句》</div>
+                <div class="poem-author">李清照</div>
+                <div class="poem-content">
+                    生当作人杰，死亦为鬼雄。<br>
+                    至今思项羽，不肯过江东。
+                </div>
+            </div>
+            <div class="poem">
+                <div class="poem-title">《水调歌头·明月几时有》</div>
+                <div class="poem-author">苏轼</div>
+                <div class="poem-content">
+                    明月几时有？把酒问青天。<br>
+                    不知天上宫阙，今夕是何年。<br>
+                    我欲乘风归去，又恐琼楼玉宇，<br>
+                    高处不胜寒。起舞弄清影，<br>
+                    何似在人间。
+                </div>
+            </div>
+        </div>
+        
+        <p></p>
+        
+        <!-- 题目3：秋天丰收的食物 -->
+        <h2>秋天丰收的食物</h2>
+        <h3>水果 (square标记)</h3>
+        <ul style="list-style-type: square;">
+            <li>苹果</li>
+            <li>梨</li>
+            <li>葡萄</li>
+            <li>柿子</li>
+            <li>石榴</li>
+            <li>山楂</li>
+            <li>柚子</li>
+            <li>猕猴桃</li>
+        </ul>
+        
+        <h3>蔬菜 (disc标记)</h3>
+        <ul style="list-style-type: disc;">
+            <li>白菜</li>
+            <li>萝卜</li>
+            <li>南瓜</li>
+            <li>红薯</li>
+            <li>土豆</li>
+            <li>山药</li>
+            <li>莲藕</li>
+            <li>冬瓜</li>
+        </ul>
+        
+        <h3>荤类食物 (circle标记)</h3>
+        <ul style="list-style-type: circle;">
+            <li>大闸蟹</li>
+            <li>羊肉</li>
+            <li>牛肉</li>
+            <li>猪肉</li>
+            <li>鸡肉</li>
+            <li>鸭肉</li>
+            <li>鱼肉</li>
+            <li>虾</li>
+        </ul>
+        
+        <p></p>
+        
+        <!-- 题目4：汽车品牌列表 -->
+        <h2>汽车品牌价格排名</h2>
+        <h3>欧美系汽车 (数字标记)</h3>
+        <ol type="1">
+            <li>劳斯莱斯</li>
+            <li>宾利</li>
+            <li>法拉利</li>
+            <li>兰博基尼</li>
+            <li>保时捷</li>
+            <li>迈凯伦</li>
+            <li>阿斯顿·马丁</li>
+            <li>奔驰</li>
+        </ol>
+        
+        <h3>日韩系汽车 (大写字母标记)</h3>
+        <ol type="A">
+            <li>雷克萨斯</li>
+            <li>讴歌</li>
+            <li>英菲尼迪</li>
+            <li>丰田</li>
+            <li>本田</li>
+            <li>日产</li>
+            <li>现代</li>
+            <li>起亚</li>
+        </ol>
+        
+        <h3>国产汽车 (大写罗马字母标记)</h3>
+        <ol type="I">
+            <li>红旗</li>
+            <li>蔚来</li>
+            <li>理想</li>
+            <li>小鹏</li>
+            <li>比亚迪</li>
+            <li>吉利</li>
+            <li>长城</li>
+            <li>长安</li>
+        </ol>
+        
+        <!-- 题目5：跳转提示 -->
+        <div class="countdown">
+            本页面将在2分钟后自动跳转到山东师范大学首页
+        </div>
+    </div>
+</body>
+</html>
