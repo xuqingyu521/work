@@ -1,0 +1,621 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+#include <memory>
+#include <sstream>
+#include <fstream>
+#include <cstdlib>
+#include <cmath>
+
+using namespace std;
+
+// ==================== 日期类 Date (任务二) ====================
+class Date {
+private:
+    int year;
+    int month;
+    int day;
+
+public:
+    // 构造函数
+    Date(int y = 2000, int m = 1, int d = 1) : year(y), month(m), day(d) {}
+
+    // 初始化函数
+    void Init(int y, int m, int d) {
+        year = y;
+        month = m;
+        day = d;
+    }
+
+    // 读取函数
+    int getYear() const { return year; }
+    int getMonth() const { return month; }
+    int getDay() const { return day; }
+
+    // 设置函数
+    void setYear(int y) { year = y; }
+    void setMonth(int m) { month = m; }
+    void setDay(int d) { day = d; }
+
+    // 显示日期
+    void display() const {
+        cout << year << "年" << month << "月" << day << "日";
+    }
+
+    // 计算星期几
+    int calWeekday() const {
+        int y = year;
+        int m = month;
+        int d = day;
+        
+        // 如果是1月或2月，转换为上一年的13月或14月
+        if (m == 1 || m == 2) {
+            m += 12;
+            y--;
+        }
+        
+        // 基姆拉尔森计算公式
+        int weekday = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+        
+        return weekday;
+    }
+
+    // 显示星期几
+    void displayWeekday() const {
+        int weekday = calWeekday();
+        string weekdays[] = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        cout << weekdays[weekday];
+    }
+
+    // 验证日期是否合法
+    bool isValid() const {
+        if (year < 1 || month < 1 || month > 12 || day < 1) {
+            return false;
+        }
+        
+        int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        
+        // 闰年判断
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            daysInMonth[1] = 29; // 闰年2月29天
+        }
+        
+        return day <= daysInMonth[month - 1];
+    }
+};
+
+// ==================== 三角形类 Triangle (任务三) ====================
+class Triangle {
+private:
+    double a, b, c; // 三条边长
+
+public:
+    // 构造函数
+    Triangle(double s1 = 1.0, double s2 = 1.0, double s3 = 1.0) : a(s1), b(s2), c(s3) {}
+
+    // 初始化函数
+    void Init(double s1, double s2, double s3) {
+        a = s1;
+        b = s2;
+        c = s3;
+    }
+
+    // 读取边长
+    double getSideA() const { return a; }
+    double getSideB() const { return b; }
+    double getSideC() const { return c; }
+
+    // 设置边长
+    void setSideA(double side) { a = side; }
+    void setSideB(double side) { b = side; }
+    void setSideC(double side) { c = side; }
+
+    // 判断是否能构成三角形
+    bool isTriangle() const {
+        return (a + b > c) && (a + c > b) && (b + c > a) && 
+               (a > 0) && (b > 0) && (c > 0);
+    }
+
+    // 计算周长
+    double perimeter() const {
+        if (!isTriangle()) return 0.0;
+        return a + b + c;
+    }
+
+    // 计算面积（海伦公式）
+    double area() const {
+        if (!isTriangle()) return 0.0;
+        double p = perimeter() / 2.0;
+        return sqrt(p * (p - a) * (p - b) * (p - c));
+    }
+
+    // 判断三角形类型（按角度）
+    int typeTriangle() const {
+        if (!isTriangle()) return -1; // 不能构成三角形
+        
+        double a2 = a * a;
+        double b2 = b * b;
+        double c2 = c * c;
+        
+        // 按角度分类
+        if (a2 + b2 == c2 || a2 + c2 == b2 || b2 + c2 == a2) {
+            return 1; // 直角三角形
+        } else if (a2 + b2 > c2 && a2 + c2 > b2 && b2 + c2 > a2) {
+            return 2; // 锐角三角形
+        } else {
+            return 3; // 钝角三角形
+        }
+    }
+
+    // 按边长分类
+    string sideType() const {
+        if (!isTriangle()) return "不能构成三角形";
+        
+        if (a == b && b == c) {
+            return "等边三角形";
+        } else if (a == b || a == c || b == c) {
+            return "等腰三角形";
+        } else {
+            return "不等边三角形";
+        }
+    }
+
+    // 显示三角形信息
+    void displayInfo() const {
+        cout << "三角形边长: a=" << a << ", b=" << b << ", c=" << c << endl;
+        
+        if (isTriangle()) {
+            cout << "周长: " << perimeter() << endl;
+            cout << "面积: " << area() << endl;
+            cout << "边长类型: " << sideType() << endl;
+            
+            int type = typeTriangle();
+            string typeNames[] = {"", "直角三角形", "锐角三角形", "钝角三角形"};
+            if (type >= 1 && type <= 3) {
+                cout << "角度类型: " << typeNames[type] << endl;
+            }
+        } else {
+            cout << "这三条边不能构成三角形！" << endl;
+        }
+        cout << "------------------------" << endl;
+    }
+};
+
+// ==================== 校园卡管理系统 (任务一) ====================
+class CampusCard {
+private:
+    string cardId;          // 卡号
+    string studentId;       // 学号
+    string name;            // 姓名
+    string department;      // 院系
+    double balance;         // 余额
+    vector<string> transactions; // 交易记录
+
+    // 格式化金额显示
+    string formatAmount(double amount) const {
+        stringstream ss;
+        ss << fixed << setprecision(2) << amount;
+        return ss.str();
+    }
+
+public:
+    // 构造函数
+    CampusCard(string id = "", string sid = "", string n = "", string dept = "", double bal = 0.0)
+        : cardId(id), studentId(sid), name(n), department(dept), balance(bal) {}
+
+    // 获取信息函数
+    string getCardId() const { return cardId; }
+    string getStudentId() const { return studentId; }
+    string getName() const { return name; }
+    string getDepartment() const { return department; }
+    double getBalance() const { return balance; }
+    int getTransactionCount() const { return transactions.size(); }
+
+    // 充值函数
+    bool recharge(double amount) {
+        if (amount <= 0) {
+            cout << "充值金额必须大于0！" << endl;
+            return false;
+        }
+        balance += amount;
+        transactions.push_back("充值: +" + formatAmount(amount) + "元");
+        cout << "充值成功！当前余额: " << formatAmount(balance) << "元" << endl;
+        return true;
+    }
+
+    // 消费函数
+    bool consume(double amount, string merchant) {
+        if (amount <= 0) {
+            cout << "消费金额必须大于0！" << endl;
+            return false;
+        }
+        if (balance < amount) {
+            cout << "余额不足！当前余额: " << formatAmount(balance) << "元" << endl;
+            return false;
+        }
+        balance -= amount;
+        transactions.push_back("消费[" + merchant + "]: -" + formatAmount(amount) + "元");
+        
+        // 按照输出格式显示
+        cout << "消费项目：" << merchant << endl;
+        cout << name << " 当前余额为：" << formatAmount(balance) << endl;
+        cout << "账户ID为：" << cardId << endl;
+        cout << "余额换算（分）：" << static_cast<int>(balance * 100) << endl;
+        cout << endl;
+        
+        return true;
+    }
+
+    // 查询余额
+    void queryBalance() const {
+        cout << "卡号: " << cardId << "，余额: " << formatAmount(balance) << "元" << endl;
+    }
+
+    // 显示交易记录
+    void showTransactions() const {
+        cout << "=== 交易记录 ===" << endl;
+        for (const auto& record : transactions) {
+            cout << record << endl;
+        }
+        cout << "================" << endl;
+    }
+
+    // 生成报表
+    void generateReport() const {
+        cout << "\n=== 一卡通消费报表 ===" << endl;
+        cout << "卡号: " << cardId << endl;
+        cout << "学号: " << studentId << endl;
+        cout << "姓名: " << name << endl;
+        cout << "院系: " << department << endl;
+        cout << "当前余额: " << formatAmount(balance) << "元" << endl;
+        cout << "交易记录数量: " << transactions.size() << endl;
+        showTransactions();
+    }
+};
+
+class CardManagementSystem {
+private:
+    vector<shared_ptr<CampusCard>> cards;  // 使用智能指针管理卡片
+
+public:
+    // 从文件导入数据
+    bool loadFromFile(const string& filename) {
+        ifstream file(filename);
+        if (!file.is_open()) {
+            cout << "无法打开文件: " << filename << endl;
+            return false;
+        }
+
+        int count = 0;
+        string cardId, studentId, name, department;
+        double balance;
+
+        while (file >> cardId >> studentId >> name >> department >> balance) {
+            auto newCard = make_shared<CampusCard>(cardId, studentId, name, department, balance);
+            cards.push_back(newCard);
+            count++;
+        }
+
+        file.close();
+        cout << "检测到文件中共有 " << count << " 位学生记录。" << endl;
+        cout << "已成功从文件读取 " << count << " 条校园卡信息。" << endl;
+        return true;
+    }
+
+    // 添加账户
+    void addAccount() {
+        string cardId, studentId, name, department;
+        double initialBalance;
+
+        cout << "请输入卡号: ";
+        cin >> cardId;
+        cout << "请输入学号: ";
+        cin >> studentId;
+        cout << "请输入姓名: ";
+        cin >> name;
+        cout << "请输入院系: ";
+        cin >> department;
+        cout << "请输入初始余额: ";
+        cin >> initialBalance;
+
+        // 检查卡号是否重复
+        for (const auto& card : cards) {
+            if (card->getCardId() == cardId) {
+                cout << "卡号已存在！" << endl;
+                return;
+            }
+        }
+
+        auto newCard = make_shared<CampusCard>(cardId, studentId, name, department, initialBalance);
+        cards.push_back(newCard);
+        cout << "账户添加成功！" << endl;
+    }
+
+    // 查找账户
+    shared_ptr<CampusCard> findAccount(const string& cardId) {
+        for (auto& card : cards) {
+            if (card->getCardId() == cardId) {
+                return card;
+            }
+        }
+        return nullptr;
+    }
+
+    // 充值
+    void rechargeAccount() {
+        string cardId;
+        double amount;
+
+        cout << "请输入卡号: ";
+        cin >> cardId;
+        auto card = findAccount(cardId);
+        if (!card) {
+            cout << "卡号不存在！" << endl;
+            return;
+        }
+
+        cout << "请输入充值金额: ";
+        cin >> amount;
+        card->recharge(amount);
+    }
+
+    // 消费
+    void consumeAccount() {
+        string cardId, merchant;
+        double amount;
+
+        cout << "请输入卡号: ";
+        cin >> cardId;
+        auto card = findAccount(cardId);
+        if (!card) {
+            cout << "卡号不存在！" << endl;
+            return;
+        }
+
+        cout << "请输入消费项目: ";
+        cin.ignore(); // 清除输入缓冲区
+        getline(cin, merchant);
+        cout << "请输入消费金额: ";
+        cin >> amount;
+        card->consume(amount, merchant);
+    }
+
+    // 查询余额
+    void queryBalance() {
+        string cardId;
+        cout << "请输入卡号: ";
+        cin >> cardId;
+        auto card = findAccount(cardId);
+        if (!card) {
+            cout << "卡号不存在！" << endl;
+            return;
+        }
+        card->queryBalance();
+    }
+
+    // 显示所有账户
+    void displayAllAccounts() {
+        if (cards.empty()) {
+            cout << "暂无账户信息！" << endl;
+            return;
+        }
+
+        cout << "\n| ID    | Name    | Balance | Transactions |" << endl;
+        cout << "|-------|---------|---------|--------------|" << endl;
+
+        for (const auto& card : cards) {
+            cout << "| " << setw(6) << left << card->getCardId()
+                 << "| " << setw(8) << left << card->getName()
+                 << "| " << setw(7) << right << card->getBalance()
+                 << " | " << setw(12) << left << card->getTransactionCount()
+                 << " |" << endl;
+        }
+        cout << endl;
+    }
+
+    // 生成报表
+    void generateReport() {
+        string cardId;
+        cout << "请输入卡号: ";
+        cin >> cardId;
+        auto card = findAccount(cardId);
+        if (!card) {
+            cout << "卡号不存在！" << endl;
+            return;
+        }
+        card->generateReport();
+    }
+
+    // 显示菜单
+    void showMenu() {
+        cout << "\n=== 校园卡管理系统 (Campus Card System) ===" << endl;
+        cout << "1. 添加账户" << endl;
+        cout << "2. 账户充值" << endl;
+        cout << "3. 账户消费" << endl;
+        cout << "4. 查询余额" << endl;
+        cout << "5. 显示所有账户" << endl;
+        cout << "6. 生成消费报表" << endl;
+        cout << "0. 返回主菜单" << endl;
+        cout << "请选择操作: ";
+    }
+
+    // 运行系统
+    void run() {
+        // 询问是否从文件导入数据
+        char choice;
+        cout << "是否从文件导入数据？(y/n): ";
+        cin >> choice;
+        
+        if (choice == 'y' || choice == 'Y') {
+            if (loadFromFile("cards.txt")) {
+                // 成功导入数据
+            } else {
+                cout << "文件导入失败，将使用空系统。" << endl;
+            }
+        }
+
+        // 主菜单循环
+        int menuChoice;
+        do {
+            showMenu();
+            cin >> menuChoice;
+            switch (menuChoice) {
+                case 1: addAccount(); break;
+                case 2: rechargeAccount(); break;
+                case 3: consumeAccount(); break;
+                case 4: queryBalance(); break;
+                case 5: displayAllAccounts(); break;
+                case 6: generateReport(); break;
+                case 0: 
+                    cout << "返回主菜单..." << endl; 
+                    break;
+                default: 
+                    cout << "无效选择！" << endl;
+            }
+            
+            if (menuChoice != 0) {
+                cout << "请按任意键继续...";
+                cin.ignore();
+                cin.get();
+            }
+        } while (menuChoice != 0);
+    }
+};
+
+// ==================== 测试函数 ====================
+
+void testDateClass() {
+    cout << "\n=== 测试日期类 ===" << endl;
+    
+    // 测试1：正常日期
+    Date date1(2024, 3, 15);
+    cout << "测试1: ";
+    date1.display();
+    cout << " 是 ";
+    date1.displayWeekday();
+    cout << endl;
+    
+    // 测试2：年初日期
+    Date date2;
+    date2.Init(2025, 1, 1);
+    cout << "测试2: ";
+    date2.display();
+    cout << " 是 ";
+    date2.displayWeekday();
+    cout << endl;
+    
+    // 测试3：闰年测试
+    Date date3(2024, 2, 29); // 闰年
+    cout << "测试3: ";
+    date3.display();
+    cout << " 是 ";
+    date3.displayWeekday();
+    cout << " (闰年测试)" << endl;
+    
+    // 测试4：日期有效性检查
+    Date date4(2024, 2, 30); // 无效日期
+    cout << "测试4: ";
+    date4.display();
+    cout << " 有效性: " << (date4.isValid() ? "有效" : "无效") << endl;
+    
+    // 测试5：用户输入日期
+    Date date5;
+    int y, m, d;
+    cout << "\n请输入日期测试 (年 月 日): ";
+    cin >> y >> m >> d;
+    date5.Init(y, m, d);
+    if (date5.isValid()) {
+        date5.display();
+        cout << " 是 ";
+        date5.displayWeekday();
+        cout << endl;
+    } else {
+        cout << "无效日期！" << endl;
+    }
+    
+    cout << "请按任意键继续...";
+    cin.ignore();
+    cin.get();
+}
+
+void testTriangleClass() {
+    cout << "\n=== 测试三角形类 ===" << endl;
+    
+    // 测试1：直角三角形
+    cout << "测试1: 直角三角形 (3,4,5)" << endl;
+    Triangle t1(3, 4, 5);
+    t1.displayInfo();
+    
+    // 测试2：等边三角形
+    cout << "测试2: 等边三角形 (5,5,5)" << endl;
+    Triangle t2(5, 5, 5);
+    t2.displayInfo();
+    
+    // 测试3：锐角三角形
+    cout << "测试3: 锐角三角形 (5,6,7)" << endl;
+    Triangle t3(5, 6, 7);
+    t3.displayInfo();
+    
+    // 测试4：钝角三角形
+    cout << "测试4: 钝角三角形 (3,4,6)" << endl;
+    Triangle t4(3, 4, 6);
+    t4.displayInfo();
+    
+    // 测试5：不能构成三角形
+    cout << "测试5: 不能构成三角形 (1,2,3)" << endl;
+    Triangle t5(1, 2, 3);
+    t5.displayInfo();
+    
+    // 测试6：用户输入测试
+    double s1, s2, s3;
+    cout << "请输入三角形三边长度测试: ";
+    cin >> s1 >> s2 >> s3;
+    Triangle t6(s1, s2, s3);
+    t6.displayInfo();
+    
+    cout << "请按任意键继续...";
+    cin.ignore();
+    cin.get();
+}
+
+// ==================== 主函数 ====================
+
+void showMainMenu() {
+    cout << "\n=== C++ 实验任务集成系统 ===" << endl;
+    cout << "1. 校园一卡通消费管理系统" << endl;
+    cout << "2. 日期类测试" << endl;
+    cout << "3. 三角形类测试" << endl;
+    cout << "0. 退出系统" << endl;
+    cout << "请选择要运行的系统: ";
+}
+
+int main() {
+    int choice;
+    
+    do {
+        showMainMenu();
+        cin >> choice;
+        
+        switch (choice) {
+            case 1: {
+                CardManagementSystem cardSystem;
+                cardSystem.run();
+                break;
+            }
+            case 2:
+                testDateClass();
+                break;
+            case 3:
+                testTriangleClass();
+                break;
+            case 0:
+                cout << "感谢使用，再见！" << endl;
+                break;
+            default:
+                cout << "无效选择，请重新选择！" << endl;
+        }
+    } while (choice != 0);
+    
+    return 0;
+}
