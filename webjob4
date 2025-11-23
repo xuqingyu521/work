@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原创小说交流会 · Writer's Salon</title>
+    <style>
+        body {
+            background-color: #F0E8FF; /* 薄雾紫 */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .page {
+            display: inline-block;
+            background-color: #fefaf5;
+            box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+            text-align: left;
+            max-width: 720px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+        
+        /* 后代选择器 */
+        div table a {
+            text-decoration: underline;
+            color: #6a0dad;
+        }
+        
+        /* 链接伪类 */
+        a:link {
+            color: #8a2be2;
+        }
+        
+        a:visited {
+            color: #9370db;
+        }
+        
+        a:hover {
+            color: #4b0082;
+            text-decoration: underline;
+        }
+        
+        a:active {
+            color: #9932cc;
+        }
+        
+        /* 并集选择器 */
+        h1, h2, h3, h4, h5, h6 {
+            color: #4b0082;
+            font-family: "Times New Roman", serif;
+        }
+        
+        /* ID选择器 */
+        p#intro {
+            font-weight: bold;
+            color: #8a2be2;
+            font-size: 1.1em;
+        }
+        
+        /* 带类名的链接 */
+        a.red {
+            color: #ff4500;
+        }
+        
+        a.blue {
+            color: #1e90ff;
+        }
+        
+        /* 伪元素 */
+        p::first-letter {
+            font-size: 1.5em;
+            color: #4b0082;
+        }
+        
+        div::first-line {
+            font-weight: bold;
+        }
+        
+        .notice {
+            background-color: #f5f0ff;
+            padding: 15px;
+            border-left: 4px solid #8a2be2;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #d8bfd8;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #e6e6fa;
+        }
+        
+        .link-area {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8ff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 顶部标题区 -->
+        <div>
+            <h1>原创小说交流会 · Writer's Salon</h1>
+        </div>
+        
+        <!-- 活动介绍区 -->
+        <div>
+            <h2 id="intro">活动介绍</h2>
+            <p>在这个数字化的时代，文字依然拥有最强大的力量。我们的原创小说交流会为所有热爱写作的朋友们提供了一个分享与交流的平台。无论你是经验丰富的作家，还是刚刚开始创作的新手，这里都欢迎你的加入。</p>
+            <p>我们相信，每一个故事都值得被讲述，每一个角色都值得被倾听。在这里，你可以分享你的创作心得，讨论情节构思，获得宝贵的反馈意见，甚至找到志同道合的创作伙伴。</p>
+            <p>每一次交流都是一次灵感的碰撞，每一次分享都是一次成长的机遇。让我们在文字的世界里相遇，共同编织那些触动人心的故事。</p>
+            <p id="intro">重要提示：请每位参与者准备一段自己的原创作品（500-1000字）用于现场分享与讨论。</p>
+        </div>
+        
+        <!-- 活动报名信息表格区 -->
+        <div>
+            <h3>已报名作者信息</h3>
+            <table>
+                <tr>
+                    <th>作者笔名</th>
+                    <th>作品类型</th>
+                    <th>创作经验</th>
+                </tr>
+                <tr>
+                    <td>墨染</td>
+                    <td>奇幻</td>
+                    <td>5年</td>
+                </tr>
+                <tr>
+                    <td>ShadowInk</td>
+                    <td>悬疑</td>
+                    <td>3年</td>
+                </tr>
+                <tr>
+                    <td>青衫</td>
+                    <td>现实</td>
+                    <td>2年</td>
+                </tr>
+                <tr>
+                    <td>梦笔生花</td>
+                    <td>科幻</td>
+                    <td>4年</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- 页面链接区 -->
+        <div>
+            <div class="link-area">
+                <a href="https://hongchenwusdnu.github.io/bookstore/job4.html" class="red">查看往期写作交流照片</a><br><br>
+                <a href="job3.html" class="blue">在线咨询创作详情</a>
+            </div>
+        </div>
+        
+        <!-- 底部公告区 -->
+        <div class="notice">
+            <div>【创作分享】下期活动将特别邀请知名网络小说作家"笔墨春秋"分享他的创作心路历程<br>以及如何构建引人入胜的小说世界。</div>
+            <br>
+            <div>【作品征集】我们正在筹备一本社团成员原创作品合集<br>欢迎各位作者提交自己的短篇小说，入选作品将有机会正式出版。</div>
+            <br>
+            <div>【写作工作坊】每月第一个周六将举办写作技巧工作坊<br>主题包括人物塑造、情节设计、对话写作等，帮助大家提升创作水平。</div>
+        </div>
+    </div>
+</body>
+</html>
