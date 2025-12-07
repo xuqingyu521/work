@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线购物折扣网站 - 学号尾号6</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #2575fc;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        h3 {
+            color: #6a11cb;
+            margin: 20px 0 10px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .panel {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .clock-panel {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .clock {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2575fc;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .discount-info {
+            background-color: #e8f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 5px solid #2575fc;
+        }
+        
+        .special-discount {
+            background-color: #ffe8e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2575fc;
+            box-shadow: 0 0 0 2px rgba(37, 117, 252, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #eee;
+        }
+        
+        .result-line {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .history-panel {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        tr:hover {
+            background-color: #f5f7fa;
+        }
+        
+        .highlight {
+            color: #2575fc;
+            font-weight: bold;
+        }
+        
+        .special-highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .clock {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>在线购物折扣网站</h1>
+        <p>学号尾号6 - 特殊折扣：没有选择加急发货且购买数量≥2件时，订单金额再打98折</p>
+    </header>
+    
+    <div class="clock-panel">
+        <h2>实时时钟与折扣时段</h2>
+        <div class="clock" id="clock">00:00:00</div>
+        <div class="discount-info" id="discountMessage"></div>
+        <div class="special-discount">
+            <h3>学号尾号6专属折扣</h3>
+            <p>当「没有选择加急发货 <strong>且</strong> 购买数量 ≥ 2 件」时，在通用折扣之后，对订单金额再打 <strong>98 折</strong>。</p>
+            <p>条件：!isUrgent && quantity >= 2</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="panel">
+            <h2>添加订单</h2>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="customerName">客户名称：</label>
+                    <input type="text" id="customerName" placeholder="请输入客户名称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="price">商品单价（元）：</label>
+                    <input type="number" id="price" min="0" step="0.01" placeholder="请输入商品单价">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">购买数量：</label>
+                    <input type="number" id="quantity" min="1" step="1" placeholder="请输入购买数量">
+                </div>
+                
+                <div class="form-group">
+                    <label for="isVip">客户类型：</label>
+                    <select id="isVip">
+                        <option value="false">普通客户</option>
+                        <option value="true">VIP客户</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="isUrgent">是否加急：</label>
+                    <select id="isUrgent">
+                        <option value="false">普通发货</option>
+                        <option value="true">加急发货（加收10%）</option>
+                    </select>
+                </div>
+                
+                <button type="button" id="addOrderBtn">添加订单</button>
+            </form>
+            
+            <div id="result" class="result-box" style="display: none;">
+                <h3>订单计算结果</h3>
+                <div id="resultContent"></div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2>折扣计算说明</h2>
+            <div class="discount-info">
+                <h3>通用折扣规则：</h3>
+                <ol>
+                    <li>正常总价 = 单价 × 数量</li>
+                    <li>VIP客户享受9折优惠</li>
+                    <li>加急发货加收10%费用</li>
+                    <li>每小时前10分钟内下单享受85折时间折扣</li>
+                </ol>
+            </div>
+            
+            <div class="special-discount">
+                <h3>学号尾号6专属规则：</h3>
+                <p>当订单<strong>没有选择加急发货</strong>并且<strong>购买数量≥2件</strong>时，在通用折扣之后，订单金额再打<strong>98折</strong>。</p>
+                <p>计算公式：finalTotal = finalTotal × 0.98</p>
+            </div>
+            
+            <div class="discount-info">
+                <h3>计算步骤示例：</h3>
+                <p>1. 基础总价 = 单价 × 数量</p>
+                <p>2. VIP折扣价 = 基础总价 × 0.9（如果是VIP）</p>
+                <p>3. 加急价格 = VIP折扣价 × 1.1（如果加急）</p>
+                <p>4. 时间折扣价 = 加急价格 × 0.85（如果在前10分钟内）</p>
+                <p>5. <span class="special-highlight">学号尾号6专属折扣 = 时间折扣价 × 0.98（如果没加急且数量≥2）</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="history-panel">
+        <h2>卖家成交历史记录</h2>
+        <div id="dashboard">
+            <p>暂无订单记录，请添加订单。</p>
+        </div>
+        <table id="historyTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>客户名称</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>客户类型</th>
+                    <th>是否加急</th>
+                    <th>下单时间</th>
+                    <th>最终金额</th>
+                </tr>
+            </thead>
+            <tbody id="historyBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <footer>
+        <p>在线购物折扣网站 &copy; 2023 | 学号尾号6特殊折扣实现</p>
+        <p>作业要求：实现包含时间折扣、VIP折扣、加急加价和学号尾号特殊折扣的在线购物系统</p>
+    </footer>
+
+    <script>
+        let orderHistory = [];
+        
+        document.write("<div style='margin: 20px auto; padding: 15px; background-color: #e8f4ff; border-radius: 8px; border-left: 5px solid #2575fc; max-width: 1200px;'>");
+        document.write("<h3 style='color: #2575fc; margin-top: 0;'>购物网页折扣提醒</h3>");
+        document.write("<p>本购物网站提供以下折扣：</p>");
+        document.write("<ul>");
+        document.write("<li><strong>VIP客户</strong>享受<strong>9折</strong>优惠</li>");
+        document.write("<li><strong>加急发货</strong>加收<strong>10%</strong>费用</li>");
+        document.write("<li><strong>每小时前10分钟</strong>下单享受<strong>85折</strong>时间折扣</li>");
+        document.write("<li><strong>学号尾号6专属折扣</strong>：没有选择加急发货且购买数量≥2件时，再打<strong>98折</strong></li>");
+        document.write("</ul>");
+        document.write("</div>");
+        
+        function updateClock() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const date = now.getDate();
+            const day = now.getDay();
+            const days = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            const dayName = days[day];
+            
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('clock').textContent = `${year}年${month}月${date}日 ${dayName} ${hours}:${minutes}:${seconds}`;
+            
+            const minute = now.getMinutes();
+            const discountMessage = document.getElementById('discountMessage');
+            
+            if (minute < 10) {
+                discountMessage.innerHTML = `<h3>当前时间折扣：85折</h3><p>现在时间是每小时的前10分钟（${minute}分钟），所有订单享受85折时间折扣！</p>`;
+                discountMessage.style.backgroundColor = '#e8ffe8';
+                discountMessage.style.borderLeftColor = '#4CAF50';
+            } else {
+                discountMessage.innerHTML = `<h3>当前时间：无时间折扣</h3><p>现在时间是每小时的第${minute}分钟，不在前10分钟内，不享受时间折扣。</p>`;
+                discountMessage.style.backgroundColor = '#ffe8e8';
+                discountMessage.style.borderLeftColor = '#ff6b6b';
+            }
+        }
+        
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        document.getElementById('addOrderBtn').addEventListener('click', function() {
+            const customerName = document.getElementById('customerName').value.trim();
+            const price = parseFloat(document.getElementById('price').value);
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const isVip = document.getElementById('isVip').value === 'true';
+            const isUrgent = document.getElementById('isUrgent').value === 'true';
+            
+            if (!validateForm(customerName, price, quantity)) {
+                return;
+            }
+            
+            const orderResult = calculateOrder(customerName, price, quantity, isVip, isUrgent);
+            
+            displayResult(orderResult);
+            
+            addToHistory(orderResult);
+            
+            renderDashboard();
+        });
+        
+        function validateForm(customerName, price, quantity) {
+            if (customerName === "") {
+                alert("错误：客户名称不能为空！");
+                document.getElementById('customerName').focus();
+                return false;
+            }
+            
+            if (isNaN(price) || price <= 0) {
+                alert("错误：商品单价必须是大于0的数字！");
+                document.getElementById('price').focus();
+                return false;
+            }
+            
+            if (isNaN(quantity) || quantity <= 0 || !Number.isInteger(quantity)) {
+                alert("错误：数量必须是大于0的整数！");
+                document.getElementById('quantity').focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function calculateOrder(customerName, price, quantity, isVip, isUrgent) {
+            const now = new Date();
+            const minute = now.getMinutes();
+            const hour = now.getHours();
+            
+            const baseTotal = price * quantity;
+            
+            let afterVip = baseTotal;
+            if (isVip) {
+                afterVip = baseTotal * 0.9;
+            }
+            
+            let afterUrgent = afterVip;
+            if (isUrgent) {
+                afterUrgent = afterVip * 1.1;
+            }
+            
+            let finalTotal = afterUrgent;
+            let hitTimeDiscount = false;
+            
+            if (minute < 10) {
+                finalTotal = afterUrgent * 0.85;
+                hitTimeDiscount = true;
+            }
+            
+            let specialDiscountApplied = false;
+            if (!isUrgent && quantity >= 2) {
+                finalTotal = finalTotal * 0.98;
+                specialDiscountApplied = true;
+            }
+            
+            const orderResult = {
+                customerName: customerName,
+                price: price,
+                quantity: quantity,
+                isVip: isVip,
+                isUrgent: isUrgent,
+                baseTotal: baseTotal,
+                afterVip: afterVip,
+                afterUrgent: afterUrgent,
+                finalTotal: finalTotal,
+                hitTimeDiscount: hitTimeDiscount,
+                specialDiscountApplied: specialDiscountApplied,
+                minute: minute,
+                hour: hour,
+                orderTime: now.toLocaleString()
+            };
+            
+            return orderResult;
+        }
+        
+        function displayResult(order) {
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            let tipsHtml = "";
+            
+            tipsHtml += `<div class="result-line"><strong>客户名称：</strong>${order.customerName}</div>`;
+            tipsHtml += `<div class="result-line"><strong>商品单价：</strong>${order.price.toFixed(2)}元</div>`;
+            tipsHtml += `<div class="result-line"><strong>购买数量：</strong>${order.quantity}件</div>`;
+            tipsHtml += `<div class="result-line"><strong>客户类型：</strong>${order.isVip ? 'VIP客户' : '普通客户'}</div>`;
+            tipsHtml += `<div class="result-line"><strong>发货方式：</strong>${order.isUrgent ? '加急发货（加收10%）' : '普通发货'}</div>`;
+            tipsHtml += `<div class="result-line"><strong>下单时间：</strong>${order.orderTime}（${order.minute}分钟）</div>`;
+            tipsHtml += `<div class="result-line"><strong>基础总价（单价×数量）：</strong><span class="highlight">${order.baseTotal.toFixed(2)}元</span></div>`;
+            
+            if (order.isVip) {
+                tipsHtml += `<div class="result-line"><strong>VIP 9折后价格：</strong><span class="highlight">${order.afterVip.toFixed(2)}元</span></div>`;
+            }
+            
+            if (order.isUrgent) {
+                tipsHtml += `<div class="result-line"><strong>加急加价10%后价格：</strong><span class="highlight">${order.afterUrgent.toFixed(2)}元</span></div>`;
+            }
+            
+            if (order.hitTimeDiscount) {
+                tipsHtml += `<div class="result-line"><strong>时间折扣85折后价格：</strong><span class="highlight">${order.finalTotal.toFixed(2)}元</span></div>`;
+            }
+            
+            if (order.specialDiscountApplied) {
+                tipsHtml += `<div class="result-line"><strong>学号尾号6专属折扣98折后价格：</strong><span class="special-highlight">${order.finalTotal.toFixed(2)}元</span></div>`;
+            }
+            
+            if (!order.hitTimeDiscount && !order.specialDiscountApplied) {
+                tipsHtml += `<div class="result-line"><strong>最终价格：</strong><span class="highlight">${order.finalTotal.toFixed(2)}元</span></div>`;
+            }
+            
+            tipsHtml += `<div class="result-line" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;"><strong>最终支付金额：</strong><span style="font-size: 1.5rem; color: #ff6b6b; font-weight: bold;">${order.finalTotal.toFixed(2)}元</span></div>`;
+            
+            resultContent.innerHTML = tipsHtml;
+            resultDiv.style.display = 'block';
+        }
+        
+        function addToHistory(order) {
+            orderHistory.push(order);
+        }
+        
+        function renderDashboard() {
+            const historyTable = document.getElementById('historyTable');
+            const historyBody = document.getElementById('historyBody');
+            const dashboard = document.getElementById('dashboard');
+            
+            if (orderHistory.length === 0) {
+                historyTable.style.display = 'none';
+                dashboard.innerHTML = '<p>暂无订单记录，请添加订单。</p>';
+                return;
+            }
+            
+            historyBody.innerHTML = '';
+            
+            let totalOrders = orderHistory.length;
+            let totalQuantity = 0;
+            let totalAmount = 0;
+            
+            orderHistory.forEach((order, index) => {
+                totalQuantity += order.quantity;
+                totalAmount += order.finalTotal;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${order.customerName}</td>
+                    <td>${order.price.toFixed(2)}元</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.isVip ? 'VIP' : '普通'}</td>
+                    <td>${order.isUrgent ? '是' : '否'}</td>
+                    <td>${order.orderTime}</td>
+                    <td>${order.finalTotal.toFixed(2)}元</td>
+                `;
+                historyBody.appendChild(row);
+            });
+            
+            const totalRow = document.createElement('tr');
+            totalRow.style.fontWeight = 'bold';
+            totalRow.style.backgroundColor = '#f0f8ff';
+            totalRow.innerHTML = `
+                <td colspan="3">总计：${totalOrders} 笔订单</td>
+                <td>${totalQuantity} 件</td>
+                <td colspan="3"></td>
+                <td>${totalAmount.toFixed(2)} 元</td>
+            `;
+            historyBody.appendChild(totalRow);
+            
+            historyTable.style.display = 'table';
+            dashboard.innerHTML = `<p>当前共有 ${totalOrders} 笔订单，总计 ${totalQuantity} 件商品，成交总额 ${totalAmount.toFixed(2)} 元。</p>`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDashboard();
+        });
+    </script>
+</body>
+</html>
