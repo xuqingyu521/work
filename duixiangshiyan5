@@ -1,0 +1,177 @@
+// 任务二：Point2D 和 Point3D 类的实现
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Point2D {
+private:
+    double x, y;
+public:
+    Point2D(double xVal = 0.0, double yVal = 0.0) : x(xVal), y(yVal) {
+        cout << "Point2D constructor called" << endl;
+    }
+    ~Point2D() {
+        cout << "Point2D destructor called" << endl;
+    }
+    Point2D& move(double dx, double dy) {
+        x += dx;
+        y += dy;
+        return *this;
+    }
+    void show() const {
+        cout << "Point2D: (" << x << ", " << y << ")" << endl;
+    }
+    friend double distance(const Point2D& p1, const Point2D& p2);
+};
+
+double distance(const Point2D& p1, const Point2D& p2) {
+    return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+}
+
+class Point3D : public Point2D {
+private:
+    double z;
+public:
+    Point3D(double xVal = 0.0, double yVal = 0.0, double zVal = 0.0) : Point2D(xVal, yVal), z(zVal) {
+        cout << "Point3D constructor called" << endl;
+    }
+    ~Point3D() {
+        cout << "Point3D destructor called" << endl;
+    }
+    Point3D& move(double dx, double dy, double dz) {
+        Point2D::move(dx, dy);
+        z += dz;
+        return *this;
+    }
+    void show() const {
+        Point2D::show();
+        cout << "Point3D z: " << z << endl;
+    }
+    friend double distance(const Point3D& p1, const Point3D& p2);
+};
+
+double distance(const Point3D& p1, const Point3D& p2) {
+    double xyDist = distance(static_cast<Point2D>(p1), static_cast<Point2D>(p2));
+    return sqrt(pow(xyDist, 2) + pow(p1.z - p2.z, 2));
+}
+
+void task2_test() {
+    Point2D p1(1.0, 2.0);
+    Point2D p2(4.0, 6.0);
+    p1.show();
+    p2.show();
+    cout << "Distance between p1 and p2: " << distance(p1, p2) << endl;
+    p1.move(1.0, 1.0);
+    p1.show();
+    
+    Point3D p3(1.0, 2.0, 3.0);
+    Point3D p4(4.0, 6.0, 9.0);
+    p3.show();
+    p4.show();
+    cout << "Distance between p3 and p4: " << distance(p3, p4) << endl;
+    p3.move(1.0, 1.0, 1.0);
+    p3.show();
+}
+
+// 任务三：继承方式的研究
+class Base {
+private:
+    int c;
+    static int count;
+public:
+    int a;
+protected:
+    int b;
+public:
+    Base(int aVal = 0, int bVal = 0, int cVal = 0) : a(aVal), b(bVal), c(cVal) {
+        count++;
+        cout << "Base constructor called" << endl;
+    }
+    virtual ~Base() {
+        count--;
+        cout << "Base destructor called" << endl;
+    }
+    void print() {
+        cout << "Base: a=" << a << ", b=" << b << ", c=" << c << endl;
+    }
+    static int Manage() {
+        return count;
+    }
+};
+int Base::count = 0;
+
+class Derived1 : public Base {
+public:
+    Derived1(int aVal = 0, int bVal = 0, int cVal = 0) : Base(aVal, bVal, cVal) {
+        cout << "Derived1 constructor called" << endl;
+    }
+    ~Derived1() {
+        cout << "Derived1 destructor called" << endl;
+    }
+    void testAccess() {
+        a = 10;
+        b = 20;
+    }
+};
+
+class Derived2 : protected Base {
+public:
+    Derived2(int aVal = 0, int bVal = 0, int cVal = 0) : Base(aVal, bVal, cVal) {
+        cout << "Derived2 constructor called" << endl;
+    }
+    ~Derived2() {
+        cout << "Derived2 destructor called" << endl;
+    }
+    void testAccess() {
+        a = 10;
+        b = 20;
+    }
+};
+
+class Derived3 : private Base {
+public:
+    Derived3(int aVal = 0, int bVal = 0, int cVal = 0) : Base(aVal, bVal, cVal) {
+        cout << "Derived3 constructor called" << endl;
+    }
+    ~Derived3() {
+        cout << "Derived3 destructor called" << endl;
+    }
+    void testAccess() {
+        a = 10;
+        b = 20;
+    }
+};
+
+void task3_test() {
+    Base base(1, 2, 3);
+    base.print();
+    cout << "Object count: " << Base::Manage() << endl;
+    
+    Derived1 d1(10, 20, 30);
+    d1.print();
+    d1.a = 100;
+    cout << "Object count: " << Base::Manage() << endl;
+    
+    Derived2 d2(100, 200, 300);
+    d2.testAccess();
+    cout << "Object count: " << Base::Manage() << endl;
+    
+    Derived3 d3(1000, 2000, 3000);
+    d3.testAccess();
+    cout << "Object count: " << Base::Manage() << endl;
+    
+    Base* arr[4];
+    arr[0] = &base;
+    arr[1] = &d1;
+    for (int i = 0; i < 2; i++) {
+        arr[i]->print();
+    }
+}
+
+int main() {
+    cout << "=== Task2 Test ===" << endl;
+    task2_test();
+    cout << "\n=== Task3 Test ===" << endl;
+    task3_test();
+    return 0;
+}
